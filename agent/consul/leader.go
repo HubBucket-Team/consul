@@ -1115,6 +1115,7 @@ func (s *Server) getCAProvider() (ca.Provider, *structs.CARoot) {
 		resultRoot = s.caProviderRoot
 		s.caProviderLock.RUnlock()
 
+		// TODO(mike): should this retry be removed along with managed proxies?
 		// In cases where an agent is started with managed proxies, we may ask
 		// for the provider before establishLeadership completes. If we're the
 		// leader, then wait and get the provider again

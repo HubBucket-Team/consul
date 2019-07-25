@@ -244,8 +244,7 @@ type Agent struct {
 	// proxyConfig is the manager for proxy service (Kind = connect-proxy)
 	// configuration state. This ensures all state needed by a proxy registration
 	// is maintained in cache and handles pushing updates to that state into XDS
-	// server to be pushed out to Envoy. This is NOT related to managed proxies
-	// directly.
+	// server to be pushed out to Envoy.
 	proxyConfig *proxycfg.Manager
 
 	// serviceManager is the manager for combining local service registrations with
@@ -3441,22 +3440,4 @@ func (a *Agent) registerCache() {
 		RefreshTimer:   0 * time.Second,
 		RefreshTimeout: 10 * time.Minute,
 	})
-}
-
-// defaultProxyCommand returns the default Connect managed proxy command.
-func defaultProxyCommand(agentCfg *config.RuntimeConfig) ([]string, error) {
-	// Get the path to the current executable. This is cached once by the
-	// library so this is effectively just a variable read.
-	execPath, err := os.Executable()
-	if err != nil {
-		return nil, err
-	}
-
-	// "consul connect proxy" default value for managed daemon proxy
-	cmd := []string{execPath, "connect", "proxy"}
-
-	if agentCfg != nil && agentCfg.LogLevel != "INFO" {
-		cmd = append(cmd, "-log-level", agentCfg.LogLevel)
-	}
-	return cmd, nil
 }

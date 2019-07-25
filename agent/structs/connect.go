@@ -40,20 +40,6 @@ const (
 	ProxyExecModeTest
 )
 
-// NewProxyExecMode returns the proper ProxyExecMode for the given string value.
-func NewProxyExecMode(raw string) (ProxyExecMode, error) {
-	switch raw {
-	case "":
-		return ProxyExecModeUnspecified, nil
-	case "daemon":
-		return ProxyExecModeDaemon, nil
-	case "script":
-		return ProxyExecModeScript, nil
-	default:
-		return 0, fmt.Errorf("invalid exec mode: %s", raw)
-	}
-}
-
 // String implements Stringer
 func (m ProxyExecMode) String() string {
 	switch m {
