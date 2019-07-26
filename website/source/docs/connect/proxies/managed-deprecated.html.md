@@ -21,7 +21,7 @@ recommended you do not build anything using Managed Proxies and consider using
 [sidecar service
 registrations](/docs/connect/proxies/sidecar-service.html) instead.
 
-Managed Proxies have been deprecated since Consul 1.3 and have been fully removed
+Managed proxies have been deprecated since Consul 1.3 and have been fully removed
 in Consul 1.6. Anyone using Managed Proxies should aim to change their workflow
 as soon as possible to avoid issues with a later upgrade.
 
